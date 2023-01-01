@@ -10,12 +10,12 @@ module ServiceOrchestrator
     end
 
     def self.register(name, klass = nil, &block)
-      if klass && !klass.respond_to?(:build_and_wire)
-        raise ServiceOrchestrator::Error, "#{klass} should implement the build_and_wire class method"
+      if klass && !klass.respond_to?(:wire)
+        raise ServiceOrchestrator::Error, "#{klass} should implement the wire class method"
       end
 
       define_method name do |*args|
-        dependencies[name] ||= klass ? klass.build_and_wire(self) : instance_exec(*args, &block)
+        dependencies[name] ||= klass ? klass.wire(self) : instance_exec(*args, &block)
       end
 
       define_method "#{name}=" do |service|

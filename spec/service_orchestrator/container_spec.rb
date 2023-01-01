@@ -37,14 +37,30 @@ RSpec.describe ServiceOrchestrator::Container do
         container_class.register(:service, SimpleService)
       end
 
-      it 'calls the build_and_wire method of the class passed in argument' do
+      it 'calls the wire class method to instantiate the service' do
         expect(container.service.call).to eq 42
       end
 
-      it 'raises an exception if the class doesn\'t implement the build_and_wire class method' do
+      it 'raises an exception if the class doesn\'t implement the wire class method' do
         expect do
           container_class.register(:wrong, String)
-        end.to raise_error('String should implement the build_and_wire class method')
+        end.to raise_error('String should implement the wire class method')
+      end
+    end
+
+    context 'Given we pass a class inheriting from Service' do
+      before do
+        container_class.register(:registration, RegistrationService)
+        container_class.register(:logger) { SimpleLogger.new }
+      end
+
+      it 'wires the dependencies' do
+        expect(container.registration.logger).to be_an(SimpleLogger)
+      end
+
+      it 'uses the dependencies' do
+        container.registration.call(username: 'johndoe')
+        expect(container.logger.logs).to eq([:user_created])
       end
     end
   end
@@ -54,8 +70,26 @@ class SimpleService
   def call
     42
   end
-
-  def self.build_and_wire(_container)
+  def self.wire(_container)
     new
   end
 end
+
+class RegistrationService < ServiceOrchestrator::Service
+  dependency :logger
+  def call(username:)
+    logger.call(event_name: :user_created)
+    username
+  end
+end
+
+class SimpleLogger
+  attr_reader :logs
+  def initialize
+    @logs = []
+  end
+  def call(event_name:)
+    @logs.push(event_name)
+  end
+end
+
