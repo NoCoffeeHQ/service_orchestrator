@@ -70,6 +70,7 @@ class SimpleService
   def call
     42
   end
+
   def self.wire(_container)
     new
   end
@@ -85,11 +86,12 @@ end
 
 class SimpleLogger
   attr_reader :logs
+
   def initialize
     @logs = []
   end
+
   def call(event_name:)
     @logs.push(event_name)
   end
 end
-

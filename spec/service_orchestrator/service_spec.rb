@@ -11,7 +11,7 @@ RSpec.describe ServiceOrchestrator::Service do
       end
     end
   end
-  
+
   describe '.new' do
     subject { service_class.new(logger: 1, push_notifier: 2, other_service: 3) }
 
@@ -35,3 +35,4 @@ RSpec.describe ServiceOrchestrator::Service do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

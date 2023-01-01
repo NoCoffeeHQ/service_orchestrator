@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module ServiceOrchestrator
+  # In order to wire automatically dependencies in the services
+  # registered within a Container, the services has to inherit
+  # from this class.
   class Service
     class_attribute :registered_deps
 

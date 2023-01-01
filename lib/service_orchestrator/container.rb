@@ -2,8 +2,7 @@
 
 module ServiceOrchestrator
   # Strongly inspired by https://github.com/bkeepers/morphine (MIT).
-  # Copying/pasting/modifying the code from Morphine seemed
-  # the cleaner solution.
+  # Copying/pasting/modifying the code from Morphine seemed the cleaner solution.
   class Container
     def dependencies
       @dependencies ||= {}
