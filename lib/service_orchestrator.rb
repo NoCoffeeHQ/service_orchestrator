@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/class/attribute'
+require 'active_support/inflector'
 
 require_relative 'service_orchestrator/version'
 require_relative 'service_orchestrator/container'

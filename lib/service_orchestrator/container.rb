@@ -8,9 +8,11 @@ module ServiceOrchestrator
       @dependencies ||= {}
     end
 
-    def self.register(name, klass = nil, &block)
+    def self.register(name, class_name = nil, &block)
+      klass = ActiveSupport::Inflector.constantize(class_name) if class_name
+
       if klass && !klass.respond_to?(:wire)
-        raise ServiceOrchestrator::Error, "#{klass} should implement the wire class method"
+        raise ServiceOrchestrator::Error, "#{class_name} should implement the wire class method"
       end
 
       define_method name do |*args|

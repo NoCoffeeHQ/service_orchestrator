@@ -34,7 +34,7 @@ RSpec.describe ServiceOrchestrator::Container do
 
     context 'Given we pass a class' do
       before do
-        container_class.register(:service, SimpleService)
+        container_class.register(:service, 'SimpleService')
       end
 
       it 'calls the wire class method to instantiate the service' do
@@ -43,14 +43,14 @@ RSpec.describe ServiceOrchestrator::Container do
 
       it 'raises an exception if the class doesn\'t implement the wire class method' do
         expect do
-          container_class.register(:wrong, String)
+          container_class.register(:wrong, 'String')
         end.to raise_error('String should implement the wire class method')
       end
     end
 
     context 'Given we pass a class inheriting from Service' do
       before do
-        container_class.register(:registration, RegistrationService)
+        container_class.register(:registration, 'RegistrationService')
         container_class.register(:logger) { SimpleLogger.new }
       end
 

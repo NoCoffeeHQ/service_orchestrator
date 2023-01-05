@@ -32,9 +32,9 @@ First, declare a container in order to register all your services.
 ```ruby
 class ApplicationContainer < ServiceOrchestrator::Container
   
-  register :onboarding, class: OnBoardingService
+  register :onboarding, 'OnBoardingService'
 
-  register :analytics_tracker, class: AmplitudeAnalyticsTrackerService
+  register :analytics_tracker, 'AmplitudeAnalyticsTrackerService'
 
   private
 
