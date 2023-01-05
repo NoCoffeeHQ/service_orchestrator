@@ -29,7 +29,7 @@ module ServiceOrchestrator
 
       klass = ActiveSupport::Inflector.constantize(class_name)
 
-      if !klass.respond_to?(:wire)
+      unless klass.respond_to?(:wire)
         raise ServiceOrchestrator::Error, "#{class_name} should implement the wire class method"
       end
 
