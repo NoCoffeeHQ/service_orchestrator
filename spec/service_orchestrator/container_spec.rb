@@ -42,8 +42,9 @@ RSpec.describe ServiceOrchestrator::Container do
       end
 
       it 'raises an exception if the class doesn\'t implement the wire class method' do
+        container_class.register(:wrong, 'String')
         expect do
-          container_class.register(:wrong, 'String')
+          container.wrong
         end.to raise_error('String should implement the wire class method')
       end
     end
