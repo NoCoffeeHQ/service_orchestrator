@@ -8,7 +8,7 @@ If you wonder if you need this library, please check out [our article]() about S
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+Install the gem and add it to the application's Gemfile by executing:
 
     $ bundle add service_orchestrator
 
