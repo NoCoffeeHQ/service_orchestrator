@@ -14,7 +14,7 @@ module ServiceOrchestrator
 
     def self.register(name, class_name = nil, &block)
       define_method name do |*args|
-        dependencies[name] ||= class_name ? service_class(class_name).wire(self) : instance_exec(*args, &block)
+        dependencies[name] ||= class_name ? service_class(class_name).wire(name, self) : instance_exec(*args, &block)
       end
 
       define_method "#{name}=" do |service|

@@ -4,7 +4,7 @@ ServiceOrchestrator is a lightweight dependency injection framework, greatly ins
 
 Compared to Morphine, it automatically wires dependencies between services thanks to some simple conventions.
 
-If you wonder if you need this library, please check out [our article]() about Services in Rails.
+If you wonder if you need this library, please check out [my article]() about Services in Rails.
 
 ## Installation
 

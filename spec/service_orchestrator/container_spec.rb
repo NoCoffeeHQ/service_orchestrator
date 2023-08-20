@@ -72,7 +72,7 @@ class SimpleService
     42
   end
 
-  def self.wire(_container)
+  def self.wire(_name, _container)
     new
   end
 end

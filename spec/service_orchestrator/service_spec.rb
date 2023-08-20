@@ -26,9 +26,10 @@ RSpec.describe ServiceOrchestrator::Service do
     let(:container_class) { Struct.new(:logger, :push_notifier, :other_service) }
     let(:container) { container_class.new(1, 2, 3) }
 
-    subject { service_class.wire(container) }
+    subject { service_class.wire(:foo, container) }
 
     it 'instantiates a new service and wire the dependencies together' do
+      expect(subject.service_name).to eq :foo
       expect(subject.logger).to eq 1
       expect(subject.push_notifier).to eq 2
       expect(subject.other_service).to eq 3

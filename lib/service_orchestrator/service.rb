@@ -7,6 +7,8 @@ module ServiceOrchestrator
   class Service
     class_attribute :registered_deps
 
+    attr_reader :service_name
+
     def self.dependencies(*names)
       names.each do |name|
         dependency(name)
@@ -19,12 +21,14 @@ module ServiceOrchestrator
       attr_accessor name
     end
 
-    def self.wire(container)
+    def self.wire(name, container)
       args = {}
       (self.registered_deps || []).each do |name|
         args[name] = container.send(name)
       end
-      new(args)
+      new(args).tap do |service|
+        service.instance_variable_set(:"@service_name", name)
+      end
     end
 
     def initialize(args)
